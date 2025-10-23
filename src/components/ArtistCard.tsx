@@ -14,7 +14,7 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
 
   return (
     <Link to={`/artist/${artist.id}`} className="block">
-      <div className="glass-effect rounded-xl overflow-hidden card-hover group h-80 flex flex-col">
+      <div className="glass-effect rounded-xl overflow-hidden card-hover group h-full flex flex-col">
         {/* 커버 이미지 */}
         <div className="relative h-48 overflow-hidden">
           <img
@@ -55,21 +55,21 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
         </div>
 
         {/* 아티스트 정보 */}
-        <div className="p-4 pt-4 flex-1 flex flex-col justify-between">
-          <div>
-            <div className="flex items-start justify-between mb-3">
-              <div>
-                <h3 className="text-lg font-bold text-white mb-1">{artist.name}</h3>
-                <p className="text-sm text-purple-300 font-medium">{subcategoryName}</p>
-              </div>
-              
-              {/* 별점 */}
-              <div className="flex items-center space-x-1">
-                <Star className="w-4 h-4 text-star-400 fill-current" />
-                <span className="text-sm text-gray-300">4.8</span>
-              </div>
+        <div className="p-4 pt-4 flex-1 flex flex-col">
+          <div className="flex items-start justify-between mb-3">
+            <div>
+              <h3 className="text-lg font-bold text-white mb-1">{artist.name}</h3>
+              <p className="text-sm text-purple-300 font-medium">{subcategoryName}</p>
             </div>
+            
+            {/* 별점 */}
+            <div className="flex items-center space-x-1">
+              <Star className="w-4 h-4 text-star-400 fill-current" />
+              <span className="text-sm text-gray-300">4.8</span>
+            </div>
+          </div>
 
+          <div className="flex-1">
             <p className="text-gray-300 text-sm mb-4 line-clamp-2">
               {artist.description}
             </p>
