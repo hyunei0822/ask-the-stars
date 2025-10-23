@@ -8,6 +8,7 @@ export interface Artist {
   coverImage?: string;
   description: string;
   location: string;
+  locations?: string[]; // 주 활동 장소들 (해시태그용)
   schedule?: string;
   followers: number;
   isSubscribed?: boolean;
@@ -33,6 +34,72 @@ export interface Good {
   image: string;
   description: string;
   stock?: number;
+}
+
+export interface ArtistService {
+  id: string;
+  artistId: string;
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  tags: string[];
+  thumbnail: string;
+  images?: string[];
+  location?: string;
+  schedule?: string;
+  duration?: string; // 서비스 소요 시간
+  maxBookings?: number; // 최대 예약 수
+  currentBookings: number; // 현재 예약 수
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Booking {
+  id: string;
+  serviceId: string;
+  userId: string;
+  artistId: string;
+  status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
+  bookingDate: string;
+  message?: string;
+  createdAt: string;
+}
+
+export interface Post {
+  id: string;
+  artistId: string;
+  title: string;
+  content: string;
+  images?: string[];
+  type: 'announcement' | 'update' | 'performance' | 'general';
+  isPinned: boolean;
+  likes: number;
+  comments: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ChatRoom {
+  id: string;
+  userId: string;
+  artistId: string;
+  status: 'requested' | 'accepted' | 'active' | 'expired';
+  timeLimit: number; // 분 단위
+  timeUsed: number; // 사용된 시간 (분)
+  price: number;
+  createdAt: string;
+  expiresAt?: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  roomId: string;
+  senderId: string;
+  senderType: 'user' | 'artist';
+  content: string;
+  timestamp: string;
 }
 
 export interface User {

@@ -43,10 +43,22 @@
     @apply rounded-full object-cover border-4 border-white/20 shadow-2xl;
     background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 20px rgba(147,51,234,0.3);
+    box-shadow: 
+      0 8px 32px rgba(0,0,0,0.3), 
+      0 0 20px rgba(147,51,234,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.2);
     /* 이미지가 잘리지 않도록 보장 */
     object-fit: cover;
     object-position: center;
+    transition: all 0.3s ease;
+  }
+  
+  .profile-circle:hover {
+    transform: scale(1.05);
+    box-shadow: 
+      0 12px 40px rgba(0,0,0,0.4), 
+      0 0 30px rgba(147,51,234,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.3);
   }
   
   .profile-container {
@@ -76,6 +88,69 @@
   .card-hover {
     position: relative;
     padding-bottom: 2rem;
+  }
+  
+  /* 프로필 이름 그라데이션 효과 */
+  .profile-name-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 50%, #c7d2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(255,255,255,0.3);
+  }
+  
+  /* 평점 배지 스타일 */
+  .rating-badge {
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  
+  /* 카테고리 아이콘 애니메이션 */
+  .category-icon {
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 8px rgba(147,51,234,0.3));
+  }
+  
+  .category-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 12px rgba(147,51,234,0.5));
+  }
+  
+  /* 해시태그 스타일 */
+  .hashtag {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer;
+    background: linear-gradient(135deg, rgba(147,51,234,0.2), rgba(236,72,153,0.2));
+    border: 1px solid rgba(147,51,234,0.3);
+    color: rgba(196,181,253,1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  
+  .hashtag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, rgba(147,51,234,0.3), rgba(236,72,153,0.3));
+  }
+  
+  .hashtag-blue {
+    background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(6,182,212,0.2));
+    border: 1px solid rgba(59,130,246,0.3);
+    color: rgba(147,197,253,1);
+  }
+  
+  .hashtag-blue:hover {
+    background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(6,182,212,0.3));
+  }
+  
+  .hashtag-green {
+    background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(16,185,129,0.2));
+    border: 1px solid rgba(34,197,94,0.3);
+    color: rgba(134,239,172,1);
+  }
+  
+  .hashtag-green:hover {
+    background: linear-gradient(135deg, rgba(34,197,94,0.3), rgba(16,185,129,0.3));
   }
 }
 
@@ -115,3 +190,4 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-purple-400/70;
 }
+

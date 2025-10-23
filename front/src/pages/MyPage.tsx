@@ -9,16 +9,30 @@ import {
   Settings,
   LogOut,
   Crown,
-  Gift
+  Gift,
+  Plus,
+  Package,
+  MessageCircle,
+  BarChart3,
+  Edit
 } from 'lucide-react';
 import { mockArtists } from '../data/mockData';
 import { User as UserType, Donation } from '../types';
+import { removeToken } from '../services/api';
 
 interface MyPageProps {
   currentUser: UserType | null;
+  setCurrentUser: (user: UserType | null) => void;
 }
 
-const MyPage: React.FC<MyPageProps> = ({ currentUser }) => {
+const MyPage: React.FC<MyPageProps> = ({ currentUser, setCurrentUser }) => {
+  // 로그아웃 함수
+  const handleLogout = () => {
+    removeToken();
+    setCurrentUser(null);
+    alert('로그아웃되었습니다.');
+  };
+
   // Mock 데이터
   const subscribedArtists = mockArtists.slice(0, 2);
   const donations: Donation[] = [
@@ -96,13 +110,69 @@ const MyPage: React.FC<MyPageProps> = ({ currentUser }) => {
               <Settings className="w-4 h-4" />
               <span>설정</span>
             </button>
-            <button className="flex items-center space-x-2 bg-red-500/20 text-red-400 px-4 py-2 rounded-lg hover:bg-red-500/30 transition-colors">
+            <button 
+              onClick={handleLogout}
+              className="flex items-center space-x-2 bg-red-500/20 text-red-400 px-4 py-2 rounded-lg hover:bg-red-500/30 transition-colors"
+            >
               <LogOut className="w-4 h-4" />
               <span>로그아웃</span>
             </button>
           </div>
         </div>
       </motion.div>
+
+      {/* 아티스트 전용 기능 */}
+      {currentUser.type === 'artist' && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="glass-effect rounded-xl p-6 mb-8"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-bold text-white">아티스트 관리</h2>
+            <div className="flex space-x-3">
+              <Link
+                to="/create-service"
+                className="flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300"
+              >
+                <Plus className="w-4 h-4" />
+                <span>상품 등록</span>
+              </Link>
+              <Link
+                to="/create-post"
+                className="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                <Edit className="w-4 h-4" />
+                <span>게시글 작성</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="p-4 bg-white/5 rounded-lg text-center">
+              <Package className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+              <div className="text-lg font-bold text-white">3</div>
+              <div className="text-sm text-gray-400">등록 상품</div>
+            </div>
+            <div className="p-4 bg-white/5 rounded-lg text-center">
+              <Calendar className="w-8 h-8 text-blue-400 mx-auto mb-2" />
+              <div className="text-lg font-bold text-white">12</div>
+              <div className="text-sm text-gray-400">예약 건수</div>
+            </div>
+            <div className="p-4 bg-white/5 rounded-lg text-center">
+              <MessageCircle className="w-8 h-8 text-green-400 mx-auto mb-2" />
+              <div className="text-lg font-bold text-white">5</div>
+              <div className="text-sm text-gray-400">채팅 요청</div>
+            </div>
+            <div className="p-4 bg-white/5 rounded-lg text-center">
+              <BarChart3 className="w-8 h-8 text-star-400 mx-auto mb-2" />
+              <div className="text-lg font-bold text-white">₩2.5M</div>
+              <div className="text-sm text-gray-400">월 수익</div>
+            </div>
+          </div>
+        </motion.div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* 구독한 아티스트 */}

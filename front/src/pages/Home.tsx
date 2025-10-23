@@ -1,18 +1,22 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import ArtistCard from '../components/ArtistCard';
 import { artistAPI } from '../services/api';
-import { Star, Sparkles } from 'lucide-react';
+import { Star, Sparkles, User } from 'lucide-react';
 
 interface HomeProps {
   selectedCategory: string;
   selectedSubcategory: string;
+  currentUser: any;
+  onScrollToArtists?: () => void;
 }
 
-const Home: React.FC<HomeProps> = ({ selectedCategory, selectedSubcategory }) => {
+const Home: React.FC<HomeProps> = ({ selectedCategory, selectedSubcategory, currentUser, onScrollToArtists }) => {
   const [artists, setArtists] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const artistsSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -36,9 +40,55 @@ const Home: React.FC<HomeProps> = ({ selectedCategory, selectedSubcategory }) =>
     fetchArtists();
   }, [selectedCategory, selectedSubcategory]);
 
+  // selectedCategory가 'all'로 변경되면 아티스트 목록으로 스크롤
+  useEffect(() => {
+    if (selectedCategory === 'all' && onScrollToArtists) {
+      // 약간의 지연을 두어 아티스트 목록이 로드된 후 스크롤
+      setTimeout(() => {
+        scrollToArtists();
+      }, 300);
+    }
+  }, [selectedCategory, onScrollToArtists]);
+
   const filteredArtists = useMemo(() => {
     return artists;
   }, [artists]);
+
+  // 아티스트 목록으로 스크롤하는 함수
+  const scrollToArtists = () => {
+    if (artistsSectionRef.current) {
+      artistsSectionRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  // 로그인하지 않은 사용자에게 로그인 페이지 표시
+  if (!currentUser) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <div className="w-16 h-16 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <User className="w-8 h-8 text-purple-400" />
+          </div>
+          <h2 className="text-xl font-bold text-white mb-4">로그인이 필요해요</h2>
+          <p className="text-gray-300 mb-6">아티스트들을 만나려면 먼저 로그인해주세요</p>
+          <Link
+            to="/login"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+          >
+            로그인하기
+          </Link>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -124,6 +174,7 @@ const Home: React.FC<HomeProps> = ({ selectedCategory, selectedSubcategory }) =>
       {/* 아티스트 그리드 */}
       {!loading && !error && (
         <motion.div
+          ref={artistsSectionRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -162,23 +213,58 @@ const Home: React.FC<HomeProps> = ({ selectedCategory, selectedSubcategory }) =>
         </motion.div>
       )}
 
-      {/* 하단 CTA */}
+      {/* 하단 CTA - 두 개의 섹션 */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="mt-16 text-center"
+        className="mt-16"
       >
-        <div className="glass-effect rounded-xl p-8">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            당신도 아티스트가 되어보세요!
-          </h2>
-          <p className="text-gray-300 mb-6">
-            길거리에서 예술을 선보이고, 팬들과 소통하며 수익을 창출해보세요.
-          </p>
-          <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
-            아티스트 등록하기
-          </button>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* 아티스트 등록 섹션 */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="glass-effect rounded-xl p-8 text-center"
+          >
+            <div className="w-16 h-16 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Star className="w-8 h-8 text-purple-400" />
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-4">
+              당신도 아티스트가 되어보세요!
+            </h2>
+            <p className="text-gray-300 mb-6">
+              길거리에서 예술을 선보이고, 팬들과 소통하며 수익을 창출해보세요.
+            </p>
+            <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
+              아티스트 등록하기
+            </button>
+          </motion.div>
+
+          {/* 셀럽 찾기 섹션 */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="glass-effect rounded-xl p-8 text-center"
+          >
+            <div className="w-16 h-16 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Sparkles className="w-8 h-8 text-blue-400" />
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-4">
+              당신의 셀럽을 찾아보세요!
+            </h2>
+            <p className="text-gray-300 mb-6">
+              다양한 분야의 아티스트들을 만나고, 특별한 경험과 소통을 즐겨보세요.
+            </p>
+            <button 
+              onClick={scrollToArtists}
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-3 rounded-full font-medium hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 transform hover:scale-105"
+            >
+              아티스트 둘러보기
+            </button>
+          </motion.div>
         </div>
       </motion.div>
     </div>
