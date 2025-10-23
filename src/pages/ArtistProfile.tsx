@@ -121,8 +121,8 @@ const ArtistProfile: React.FC = () => {
         >
           <div className="glass-effect rounded-xl p-6 sticky top-6">
             {/* 프로필 이미지 */}
-            <div className="text-center mb-6">
-              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white/20 mb-4">
+            <div className="text-center mb-6 profile-container">
+              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white/20 mb-4 profile-circle">
                 <img
                   src={artist.profileImage}
                   alt={artist.name}
