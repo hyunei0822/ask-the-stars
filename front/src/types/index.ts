@@ -1,7 +1,8 @@
 export interface Artist {
-  id: string;
+  id?: string;
+  _id?: string;
   name: string;
-  category: 'music' | 'dance' | 'art';
+  category: 'music' | 'dance' | 'art' | 'fashion' | 'beauty' | 'performance' | 'brand' | 'fitness' | 'healing' | 'product';
   subcategory: string;
   profileImage: string;
   coverImage?: string;
@@ -65,7 +66,7 @@ export interface Comment {
   replies?: Comment[];
 }
 
-export type Category = 'music' | 'dance' | 'art';
+export type Category = 'music' | 'dance' | 'art' | 'fashion' | 'beauty' | 'performance' | 'brand' | 'fitness' | 'healing' | 'product';
 export type MusicSubcategory = 'classical' | 'korean_traditional' | 'kpop' | 'korean_pop' | 'jazz' | 'rock' | 'acoustic';
 export type DanceSubcategory = 'ballet' | 'breakdance' | 'traditional' | 'kpop_dance' | 'contemporary' | 'hiphop';
 export type ArtSubcategory = 'portrait' | 'mural' | 'sculpture' | 'caricature' | 'digital_art' | 'street_art';

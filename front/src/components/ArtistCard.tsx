@@ -9,11 +9,11 @@ interface ArtistCardProps {
 }
 
 const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
-  const categoryInfo = categories[artist.category];
-  const subcategoryName = categoryInfo.subcategories[artist.subcategory as keyof typeof categoryInfo.subcategories];
+  const categoryInfo = categories[artist.category as keyof typeof categories];
+  const subcategoryName = categoryInfo?.subcategories[artist.subcategory as keyof typeof categoryInfo.subcategories] || artist.subcategory;
 
   return (
-    <Link to={`/artist/${artist.id}`} className="block">
+    <Link to={`/artist/${(artist as any)._id || artist.id}`} className="block">
       <div className="glass-effect rounded-xl overflow-hidden card-hover group">
         {/* 커버 이미지 */}
         <div className="relative h-48 overflow-hidden">
@@ -27,8 +27,8 @@ const ArtistCard: React.FC<ArtistCardProps> = ({ artist }) => {
           {/* 카테고리 배지 */}
           <div className="absolute top-3 left-3">
             <div className="flex items-center space-x-2 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1">
-              <span className="text-lg">{categoryInfo.icon}</span>
-              <span className="text-white text-sm font-medium">{categoryInfo.name}</span>
+              <span className="text-lg">{categoryInfo?.icon || '🎵'}</span>
+              <span className="text-white text-sm font-medium">{categoryInfo?.name || artist.category}</span>
             </div>
           </div>
 

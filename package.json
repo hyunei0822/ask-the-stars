@@ -1,34 +1,35 @@
 {
   "name": "ask-the-stars",
+  "version": "1.0.0",
+  "description": "길거리 예술가 후원 플랫폼",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.1",
-    "lucide-react": "^0.294.0",
-    "framer-motion": "^10.16.5"
+    "install:all": "npm install && cd front && npm install && cd ../back && npm install",
+    "front:dev": "cd front && npm run dev",
+    "front:build": "cd front && npm run build",
+    "front:preview": "cd front && npm run preview",
+    "backend:dev": "cd back && npm run dev",
+    "backend:build": "cd back && npm run build",
+    "backend:start": "cd back && npm start",
+    "dev": "concurrently \"npm run backend:dev\" \"npm run front:dev\"",
+    "build": "npm run backend:build && npm run front:build",
+    "start": "npm run backend:start"
   },
   "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "@vitejs/plugin-react": "^4.1.1",
-    "autoprefixer": "^10.4.16",
-    "eslint": "^8.53.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.4",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.5",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0"
-  }
+    "concurrently": "^8.2.2"
+  },
+  "workspaces": [
+    "front",
+    "back"
+  ],
+  "keywords": [
+    "street-artist",
+    "support",
+    "platform",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "MIT"
 }

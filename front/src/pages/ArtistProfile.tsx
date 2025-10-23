@@ -16,6 +16,7 @@ import { categories } from '../data/mockData';
 import { Artist, Comment } from '../types';
 import DonationModal from '../components/DonationModal';
 import CommentSection from '../components/CommentSection';
+import { artistAPI } from '../services/api';
 
 const ArtistProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -25,39 +26,52 @@ const ArtistProfile: React.FC = () => {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
-    const foundArtist = mockArtists.find(a => a.id === id);
-    setArtist(foundArtist || null);
-    
-    // Mock comments
-    setComments([
-      {
-        id: '1',
-        artistId: id || '',
-        userId: 'user1',
-        userName: '팬1',
-        content: '정말 멋진 공연이었어요! 다음에 또 보고 싶습니다.',
-        type: 'general',
-        date: '2024-01-20'
-      },
-      {
-        id: '2',
-        artistId: id || '',
-        userId: 'user2',
-        userName: '음악애호가',
-        content: '혹시 클래식 곡도 연주하시나요?',
-        type: 'question',
-        date: '2024-01-19'
-      },
-      {
-        id: '3',
-        artistId: id || '',
-        userId: 'user3',
-        userName: '댄스팬',
-        content: 'BTS의 Dynamite 안무도 해주실 수 있나요?',
-        type: 'song_request',
-        date: '2024-01-18'
+    const fetchArtist = async () => {
+      if (!id) return;
+      
+      try {
+        // 먼저 백엔드 API에서 아티스트를 가져오려고 시도
+        const response = await artistAPI.getById(id);
+        setArtist(response);
+      } catch (error) {
+        // 백엔드에서 찾지 못하면 목업 데이터에서 찾기
+        const foundArtist = mockArtists.find(a => a.id === id || (a as any)._id === id);
+        setArtist(foundArtist || null);
       }
-    ]);
+      
+      // Mock comments
+      setComments([
+        {
+          id: '1',
+          artistId: id || '',
+          userId: 'user1',
+          userName: '팬1',
+          content: '정말 멋진 공연이었어요! 다음에 또 보고 싶습니다.',
+          type: 'general',
+          date: '2024-01-20'
+        },
+        {
+          id: '2',
+          artistId: id || '',
+          userId: 'user2',
+          userName: '음악애호가',
+          content: '혹시 클래식 곡도 연주하시나요?',
+          type: 'question',
+          date: '2024-01-19'
+        },
+        {
+          id: '3',
+          artistId: id || '',
+          userId: 'user3',
+          userName: '댄스팬',
+          content: 'BTS의 Dynamite 안무도 해주실 수 있나요?',
+          type: 'song_request',
+          date: '2024-01-18'
+        }
+      ]);
+    };
+
+    fetchArtist();
   }, [id]);
 
   const handleAddComment = (content: string, type: Comment['type']) => {
@@ -89,8 +103,8 @@ const ArtistProfile: React.FC = () => {
     );
   }
 
-  const categoryInfo = categories[artist.category];
-  const subcategoryName = categoryInfo.subcategories[artist.subcategory as keyof typeof categoryInfo.subcategories];
+  const categoryInfo = categories[artist.category as keyof typeof categories];
+  const subcategoryName = categoryInfo?.subcategories[artist.subcategory as keyof typeof categoryInfo.subcategories] || artist.subcategory;
 
   return (
     <div className="min-h-screen">
@@ -130,7 +144,7 @@ const ArtistProfile: React.FC = () => {
               </div>
               <h1 className="text-2xl font-bold text-white mb-2">{artist.name}</h1>
               <div className="flex items-center justify-center space-x-2 mb-2">
-                <span className="text-lg">{categoryInfo.icon}</span>
+                <span className="text-lg">{categoryInfo?.icon || '🎵'}</span>
                 <span className="text-purple-300 font-medium">{subcategoryName}</span>
               </div>
               <div className="flex items-center justify-center space-x-1">

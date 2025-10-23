@@ -176,5 +176,89 @@ export const categories = {
       digital_art: '디지털 아트',
       street_art: '스트리트 아트'
     }
+  },
+  fashion: {
+    name: '패션',
+    icon: '👗',
+    subcategories: {
+      street_fashion: '스트리트 패션',
+      vintage: '빈티지',
+      korean_fashion: '한국 패션',
+      sustainable: '지속가능 패션',
+      custom: '맞춤 제작',
+      styling: '스타일링'
+    }
+  },
+  beauty: {
+    name: '뷰티',
+    icon: '💄',
+    subcategories: {
+      makeup: '메이크업',
+      skincare: '스킨케어',
+      hair: '헤어',
+      nail: '네일',
+      korean_beauty: 'K-뷰티',
+      tutorial: '뷰티 튜토리얼'
+    }
+  },
+  performance: {
+    name: '공연',
+    icon: '🎭',
+    subcategories: {
+      theater: '연극',
+      musical: '뮤지컬',
+      magic: '마술',
+      comedy: '코미디',
+      circus: '서커스',
+      street_performance: '길거리 공연'
+    }
+  },
+  brand: {
+    name: '브랜드',
+    icon: '🏷️',
+    subcategories: {
+      fashion_brand: '패션 브랜드',
+      beauty_brand: '뷰티 브랜드',
+      lifestyle: '라이프스타일',
+      tech: '테크 브랜드',
+      food: '푸드 브랜드',
+      startup: '스타트업'
+    }
+  },
+  fitness: {
+    name: '운동',
+    icon: '💪',
+    subcategories: {
+      yoga: '요가',
+      pilates: '필라테스',
+      dance_fitness: '댄스 피트니스',
+      strength: '근력 운동',
+      cardio: '유산소',
+      outdoor: '야외 운동'
+    }
+  },
+  healing: {
+    name: '힐링',
+    icon: '🧘',
+    subcategories: {
+      meditation: '명상',
+      mindfulness: '마인드풀니스',
+      therapy: '치료',
+      wellness: '웰니스',
+      spa: '스파',
+      mental_health: '정신 건강'
+    }
+  },
+  product: {
+    name: '제품',
+    icon: '🛍️',
+    subcategories: {
+      handmade: '수제 제품',
+      artisanal: '장인 제품',
+      organic: '유기농',
+      eco_friendly: '친환경',
+      tech_gadgets: '테크 가젯',
+      home_decor: '홈 데코'
+    }
   }
 };

@@ -1,140 +1,149 @@
-# 🌟 별들에게 물어봐 - 길거리 예술가 후원 플랫폼
+# Ask the Stars - 길거리 예술가 후원 플랫폼
 
-길거리 예술가(버스커)와 일반 유저(관객, 후원자)를 연결하는 후원·소통 플랫폼입니다.
+길거리 예술가들과 후원자들을 연결하는 플랫폼입니다.
 
-## ✨ 주요 기능
+## 🚀 빠른 시작
 
-### 🎯 핵심 기능
-- **아티스트 발견**: 음악, 댄스, 아트 카테고리별 아티스트 탐색
-- **실시간 소통**: 아티스트와 팬 간의 질문, 요청, 신청곡 소통
-- **후원 시스템**: 구독, 굿즈 구매, 직접 후원을 통한 수익 창출
-- **프로필 관리**: 아티스트와 일반 유저의 개별 프로필 및 활동 관리
-
-### 🎨 카테고리
-- **🎵 음악**: 클래식, 국악, K-POP, 가요, 재즈, 록, 어쿠스틱
-- **💃 댄스**: 발레, 브레이크댄스, 전통무용, K-POP 댄스, 컨템포러리, 힙합
-- **🎨 아트**: 초상화, 벽화, 조각, 캐리커처, 디지털 아트, 스트리트 아트
-
-### 💰 후원 방식
-- **월 구독**: 정기적인 후원으로 아티스트 지원
-- **굿즈 구매**: 아티스트가 제작한 굿즈 구매
-- **직접 후원**: 원하는 금액으로 직접 후원
-
-## 🚀 기술 스택
-
-- **Frontend**: React 18 + TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **Animation**: Framer Motion
-- **Icons**: Lucide React
-- **Routing**: React Router DOM
-
-## 📦 설치 및 실행
-
-### 필수 요구사항
-- Node.js 18+ 
-- npm 또는 yarn
-
-### 설치
+### 1. 의존성 설치
 ```bash
-# 의존성 설치
-npm install
+# 모든 의존성 설치 (프론트엔드 + 백엔드)
+npm run install:all
 
-# 개발 서버 실행
-npm run dev
-
-# 빌드
-npm run build
-
-# 빌드 미리보기
-npm run preview
+# 또는 개별 설치
+npm install          # 프론트엔드
+cd back && npm install  # 백엔드
 ```
 
-## 🎨 디자인 특징
+### 2. 환경 설정
 
-### 🌌 테마
-- **다크 테마**: 우주적이고 신비로운 분위기
-- **그라데이션**: 보라색-핑크색 그라데이션으로 별빛 효과
-- **글래스모피즘**: 반투명 유리 효과로 현대적인 UI
+#### 백엔드 환경 변수 설정
+`back/.env` 파일이 이미 생성되어 있습니다:
+```env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/ask-the-stars
+JWT_SECRET=your-super-secret-jwt-key-here-change-in-production
+NODE_ENV=development
+```
 
-### ✨ 애니메이션
-- **별빛 효과**: 반짝이는 별 아이콘과 글로우 효과
-- **부드러운 전환**: 페이지 전환과 호버 효과
-- **반응형 애니메이션**: 사용자 인터랙션에 따른 동적 효과
+#### MongoDB 실행
+MongoDB가 로컬에서 실행 중인지 확인하세요.
 
-### 📱 반응형 디자인
-- **모바일 우선**: 모바일 환경에 최적화
-- **적응형 레이아웃**: 화면 크기에 따른 자동 조정
-- **터치 친화적**: 모바일 사용성을 고려한 UI/UX
+### 3. 개발 서버 실행
+
+#### 방법 1: 개별 실행 (권장)
+```bash
+# 터미널 1: 백엔드 실행
+npm run backend:dev
+
+# 터미널 2: 프론트엔드 실행
+npm run dev
+```
+
+#### 방법 2: 루트에서 백엔드 실행
+```bash
+# 백엔드만 실행
+npm run backend:dev
+```
 
 ## 📁 프로젝트 구조
 
 ```
-src/
-├── components/          # 재사용 가능한 컴포넌트
-│   ├── Sidebar.tsx     # 사이드바 네비게이션
-│   ├── MobileHeader.tsx # 모바일 헤더
-│   ├── ArtistCard.tsx  # 아티스트 카드
-│   ├── DonationModal.tsx # 후원 모달
-│   └── CommentSection.tsx # 댓글 섹션
-├── pages/              # 페이지 컴포넌트
-│   ├── Home.tsx        # 메인 홈페이지
-│   ├── ArtistProfile.tsx # 아티스트 프로필
-│   ├── MyPage.tsx      # 마이페이지
-│   └── Login.tsx       # 로그인/회원가입
-├── types/              # TypeScript 타입 정의
-│   └── index.ts
-├── data/               # Mock 데이터
-│   └── mockData.ts
-├── App.tsx             # 메인 앱 컴포넌트
-├── main.tsx           # 앱 진입점
-└── index.css          # 글로벌 스타일
+ask-the-stars/
+├── front/                  # 프론트엔드 (React + Vite)
+│   ├── src/
+│   │   ├── components/     # React 컴포넌트
+│   │   ├── pages/         # 페이지 컴포넌트
+│   │   ├── services/      # API 서비스
+│   │   └── types/         # TypeScript 타입
+│   ├── package.json       # 프론트엔드 의존성
+│   └── README.md
+├── back/                  # 백엔드 (Node.js + Express)
+│   ├── src/
+│   │   ├── controllers/    # API 컨트롤러
+│   │   ├── models/        # MongoDB 모델
+│   │   ├── routes/        # API 라우트
+│   │   └── middleware/     # 미들웨어
+│   ├── uploads/           # 파일 업로드 폴더
+│   ├── package.json       # 백엔드 의존성
+│   └── README.md
+├── package.json           # 전체 프로젝트 관리
+└── README.md
 ```
 
-## 🎯 주요 페이지
+## 🔧 개발 명령어
 
-### 🏠 홈페이지
-- 카테고리별 아티스트 필터링
-- 아티스트 카드 그리드 레이아웃
-- 반응형 디자인
+### 전체 프로젝트
+```bash
+npm run dev          # 프론트엔드 + 백엔드 동시 실행
+npm run build        # 전체 빌드
+npm run install:all  # 모든 의존성 설치
+```
 
-### 👤 아티스트 프로필
-- 프로필 정보 및 공연 일정
-- 소통방/참여방 (댓글 시스템)
-- 후원 모달 (구독/굿즈/직접 후원)
-- 영상 목록
+### 프론트엔드
+```bash
+npm run front:dev     # 프론트엔드 개발 서버
+npm run front:build   # 프론트엔드 빌드
+npm run front:preview # 프론트엔드 미리보기
+```
 
-### 📱 마이페이지
-- 구독한 아티스트 목록
-- 후원 내역 및 통계
-- 사용자 정보 관리
+### 백엔드
+```bash
+npm run backend:dev     # 백엔드 개발 서버
+npm run backend:build  # 백엔드 빌드
+npm run backend:start  # 백엔드 프로덕션 서버
+```
 
-### 🔐 로그인/회원가입
-- 아티스트/일반 유저 구분
-- 소셜 로그인 (네이버)
-- 폼 유효성 검사
+## 🌐 접속 URL
 
-## 🔮 향후 개발 계획
+- **프론트엔드**: http://localhost:5173
+- **백엔드 API**: http://localhost:5000
+- **API 문서**: http://localhost:5000
 
-### 📈 기능 확장
-- [ ] 실제 결제 시스템 연동
-- [ ] 실시간 채팅 기능
-- [ ] 라이브 스트리밍
-- [ ] 아티스트 등록 시스템
-- [ ] 관리자 페이지
+## 📊 데이터베이스
 
-### 🎨 UI/UX 개선
-- [ ] 다크/라이트 테마 토글
-- [ ] 다국어 지원
-- [ ] 접근성 개선
-- [ ] PWA 지원
+- **MongoDB**: `mongodb://localhost:27017/ask-the-stars`
+- **컬렉션**: `users`, `artists`, `donations`, `comments`
 
-### 🔧 기술적 개선
-- [ ] 상태 관리 (Redux/Zustand)
-- [ ] API 연동
-- [ ] 데이터베이스 설계
-- [ ] 인증 시스템
-- [ ] 테스트 코드 작성
+## 🚀 배포
+
+### 프론트엔드 (Vercel, Netlify 등)
+```bash
+npm run build
+```
+
+### 백엔드 (AWS, Heroku, DigitalOcean 등)
+```bash
+cd back
+npm run build
+npm start
+```
+
+## 🛠️ 기술 스택
+
+### 프론트엔드
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- React Router
+
+### 백엔드
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- JWT 인증
+- Multer (파일 업로드)
+- TypeScript
+
+## 📝 API 엔드포인트
+
+- `POST /api/auth/register` - 회원가입
+- `POST /api/auth/login` - 로그인
+- `GET /api/artists` - 아티스트 목록
+- `POST /api/artists` - 아티스트 등록
+- `POST /api/donations` - 후원하기
+- `GET /api/comments` - 댓글 조회
 
 ## 🤝 기여하기
 
@@ -143,15 +152,3 @@ src/
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📄 라이선스
-
-이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 `LICENSE` 파일을 참조하세요.
-
-## 📞 연락처
-
-프로젝트에 대한 문의사항이 있으시면 언제든지 연락해주세요!
-
----
-
-⭐ 이 프로젝트가 도움이 되었다면 Star를 눌러주세요!
