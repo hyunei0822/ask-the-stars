@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 import { 
   User, 
   Heart, 
-  ShoppingBag, 
   Star, 
   Calendar, 
-  MapPin,
   Settings,
   LogOut,
   Crown,

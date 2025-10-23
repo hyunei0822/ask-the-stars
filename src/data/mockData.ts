@@ -1,4 +1,4 @@
-import { Artist, Video, Good } from '../types';
+import { Artist } from '../types';
 
 export const mockArtists: Artist[] = [
   {
@@ -76,7 +76,7 @@ export const mockArtists: Artist[] = [
     subcategory: 'portrait',
     profileImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
     coverImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=300&fit=crop',
-    description: '순간의 아름다움을 캔버스에 담는 포트레이트 아티스트.',
+    description: '순간의 아름다움을 캔버스에 담는 포트레이트 아티스트. 길거리에서 만나는 사람들의 특별한 순간을 그림으로 기록합니다.',
     location: '명동역 6번 출구',
     schedule: '평일 오후 1-5시',
     followers: 890,

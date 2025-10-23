@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Music, Zap, Palette, User, Heart, Settings } from 'lucide-react';
+import { Star, Music, Zap, Palette, User, Heart } from 'lucide-react';
 import { categories } from '../data/mockData';
 
 interface SidebarProps {

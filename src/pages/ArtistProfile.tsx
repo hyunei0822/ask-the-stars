@@ -8,7 +8,6 @@ import {
   Star, 
   Heart, 
   Play, 
-  ShoppingBag,
   ArrowLeft,
   Youtube
 } from 'lucide-react';
@@ -197,7 +196,6 @@ const ArtistProfile: React.FC = () => {
           className="lg:col-span-2"
         >
           <CommentSection
-            artistId={artist.id}
             comments={comments}
             onAddComment={handleAddComment}
           />

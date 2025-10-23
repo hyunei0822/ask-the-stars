@@ -4,12 +4,11 @@ import { Send, MessageCircle, Music, Heart, User } from 'lucide-react';
 import { Comment } from '../types';
 
 interface CommentSectionProps {
-  artistId: string;
   comments: Comment[];
   onAddComment: (content: string, type: Comment['type']) => void;
 }
 
-const CommentSection: React.FC<CommentSectionProps> = ({ artistId, comments, onAddComment }) => {
+const CommentSection: React.FC<CommentSectionProps> = ({ comments, onAddComment }) => {
   const [newComment, setNewComment] = useState('');
   const [commentType, setCommentType] = useState<Comment['type']>('general');
 

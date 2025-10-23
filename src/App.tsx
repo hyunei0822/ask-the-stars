@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import MobileHeader from './components/MobileHeader';
@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import ArtistProfile from './pages/ArtistProfile';
 import MyPage from './pages/MyPage';
 import Login from './pages/Login';
-import { Artist } from './types';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
