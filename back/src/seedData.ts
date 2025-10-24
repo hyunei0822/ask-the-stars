@@ -7,7 +7,7 @@ const seedArtists = async () => {
     console.log('🌱 시드 데이터 추가 시작...');
     
     // MongoDB 연결
-    await mongoose.connect('mongodb://localhost:27018/ask-the-stars');
+    await mongoose.connect('mongodb://localhost:27017/ask-the-stars');
     console.log('✅ MongoDB 연결 성공');
     
     // 기존 데이터 삭제
@@ -52,11 +52,25 @@ const seedArtists = async () => {
         ],
         goods: [
           {
-            name: '수제 바이올린 손목띠',
+            name: '야광팔찌',
             price: 10000,
             image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop',
-            description: '김바이올린이 직접 제작한 수제 손목띠입니다.',
+            description: '1개당 1만원 - 어둠 속에서도 빛나는 특별한 팔찌',
             stock: 20
+          },
+          {
+            name: '형광스틱',
+            price: 10000,
+            image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop',
+            description: '1개당 1만원 - 공연장에서 함께 즐길 수 있는 형광스틱',
+            stock: 30
+          },
+          {
+            name: '박수짝짝이',
+            price: 15000,
+            image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop',
+            description: '1개당 1만5천원 - 아티스트를 응원하는 특별한 도구',
+            stock: 15
           }
         ],
         userId: testUser._id
@@ -84,11 +98,25 @@ const seedArtists = async () => {
         ],
         goods: [
           {
-            name: '댄스 워크샵 티켓',
-            price: 25000,
+            name: '야광팔찌',
+            price: 10000,
             image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=200&h=200&fit=crop',
-            description: '1:1 댄스 레슨 티켓입니다.',
-            stock: 10
+            description: '1개당 1만원 - 어둠 속에서도 빛나는 특별한 팔찌',
+            stock: 20
+          },
+          {
+            name: '형광스틱',
+            price: 10000,
+            image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=200&h=200&fit=crop',
+            description: '1개당 1만원 - 공연장에서 함께 즐길 수 있는 형광스틱',
+            stock: 30
+          },
+          {
+            name: '박수짝짝이',
+            price: 15000,
+            image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=200&h=200&fit=crop',
+            description: '1개당 1만5천원 - 아티스트를 응원하는 특별한 도구',
+            stock: 15
           }
         ],
         userId: testUser._id
@@ -116,11 +144,25 @@ const seedArtists = async () => {
         ],
         goods: [
           {
-            name: '수채화 초상화',
-            price: 50000,
+            name: '야광팔찌',
+            price: 10000,
             image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
-            description: 'A4 사이즈 수채화 초상화입니다.',
-            stock: 5
+            description: '1개당 1만원 - 어둠 속에서도 빛나는 특별한 팔찌',
+            stock: 20
+          },
+          {
+            name: '형광스틱',
+            price: 10000,
+            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
+            description: '1개당 1만원 - 공연장에서 함께 즐길 수 있는 형광스틱',
+            stock: 30
+          },
+          {
+            name: '박수짝짝이',
+            price: 15000,
+            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
+            description: '1개당 1만5천원 - 아티스트를 응원하는 특별한 도구',
+            stock: 15
           }
         ],
         userId: testUser._id
@@ -148,11 +190,25 @@ const seedArtists = async () => {
         ],
         goods: [
           {
-            name: '전통 문양 스티커',
-            price: 5000,
+            name: '야광팔찌',
+            price: 10000,
             image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=200&h=200&fit=crop',
-            description: '한국 전통 문양이 들어간 스티커 세트입니다.',
-            stock: 50
+            description: '1개당 1만원 - 어둠 속에서도 빛나는 특별한 팔찌',
+            stock: 20
+          },
+          {
+            name: '형광스틱',
+            price: 10000,
+            image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=200&h=200&fit=crop',
+            description: '1개당 1만원 - 공연장에서 함께 즐길 수 있는 형광스틱',
+            stock: 30
+          },
+          {
+            name: '박수짝짝이',
+            price: 15000,
+            image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=200&h=200&fit=crop',
+            description: '1개당 1만5천원 - 아티스트를 응원하는 특별한 도구',
+            stock: 15
           }
         ],
         userId: testUser._id
@@ -178,5 +234,10 @@ const seedArtists = async () => {
     console.error('❌ 데이터 시딩 중 오류 발생:', error);
   }
 };
+
+// 직접 실행 시 시드 데이터 실행
+if (require.main === module) {
+  seedArtists();
+}
 
 export default seedArtists;

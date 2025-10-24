@@ -28,11 +28,27 @@ export const mockArtists: Artist[] = [
     goods: [
       {
         id: 'g1',
-        name: '수제 바이올린 손목띠',
+        name: '야광팔찌',
         price: 10000,
         image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop',
-        description: '김바이올린이 직접 제작한 수제 손목띠입니다.',
+        description: '1개당 1만원 - 어둠 속에서도 빛나는 특별한 팔찌',
         stock: 20
+      },
+      {
+        id: 'g2',
+        name: '형광스틱',
+        price: 10000,
+        image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop',
+        description: '1개당 1만원 - 공연장에서 함께 즐길 수 있는 형광스틱',
+        stock: 30
+      },
+      {
+        id: 'g3',
+        name: '박수짝짝이',
+        price: 15000,
+        image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop',
+        description: '1개당 1만5천원 - 아티스트를 응원하는 특별한 도구',
+        stock: 15
       }
     ]
   },
@@ -62,12 +78,28 @@ export const mockArtists: Artist[] = [
     ],
     goods: [
       {
-        id: 'g2',
-        name: '댄스 워크샵 티켓',
-        price: 25000,
+        id: 'g1',
+        name: '야광팔찌',
+        price: 10000,
         image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=200&h=200&fit=crop',
-        description: '1:1 댄스 레슨 티켓입니다.',
-        stock: 10
+        description: '1개당 1만원 - 어둠 속에서도 빛나는 특별한 팔찌',
+        stock: 20
+      },
+      {
+        id: 'g2',
+        name: '형광스틱',
+        price: 10000,
+        image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=200&h=200&fit=crop',
+        description: '1개당 1만원 - 공연장에서 함께 즐길 수 있는 형광스틱',
+        stock: 30
+      },
+      {
+        id: 'g3',
+        name: '박수짝짝이',
+        price: 15000,
+        image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=200&h=200&fit=crop',
+        description: '1개당 1만5천원 - 아티스트를 응원하는 특별한 도구',
+        stock: 15
       }
     ]
   },
@@ -96,12 +128,28 @@ export const mockArtists: Artist[] = [
     ],
     goods: [
       {
-        id: 'g3',
-        name: '수채화 초상화',
-        price: 50000,
+        id: 'g1',
+        name: '야광팔찌',
+        price: 10000,
         image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
-        description: 'A4 사이즈 수채화 초상화입니다.',
-        stock: 5
+        description: '1개당 1만원 - 어둠 속에서도 빛나는 특별한 팔찌',
+        stock: 20
+      },
+      {
+        id: 'g2',
+        name: '형광스틱',
+        price: 10000,
+        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
+        description: '1개당 1만원 - 공연장에서 함께 즐길 수 있는 형광스틱',
+        stock: 30
+      },
+      {
+        id: 'g3',
+        name: '박수짝짝이',
+        price: 15000,
+        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
+        description: '1개당 1만5천원 - 아티스트를 응원하는 특별한 도구',
+        stock: 15
       }
     ]
   },
@@ -130,12 +178,28 @@ export const mockArtists: Artist[] = [
     ],
     goods: [
       {
-        id: 'g4',
-        name: '전통 문양 스티커',
-        price: 5000,
+        id: 'g1',
+        name: '야광팔찌',
+        price: 10000,
         image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=200&h=200&fit=crop',
-        description: '한국 전통 문양이 들어간 스티커 세트입니다.',
-        stock: 50
+        description: '1개당 1만원 - 어둠 속에서도 빛나는 특별한 팔찌',
+        stock: 20
+      },
+      {
+        id: 'g2',
+        name: '형광스틱',
+        price: 10000,
+        image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=200&h=200&fit=crop',
+        description: '1개당 1만원 - 공연장에서 함께 즐길 수 있는 형광스틱',
+        stock: 30
+      },
+      {
+        id: 'g3',
+        name: '박수짝짝이',
+        price: 15000,
+        image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=200&h=200&fit=crop',
+        description: '1개당 1만5천원 - 아티스트를 응원하는 특별한 도구',
+        stock: 15
       }
     ]
   }
@@ -191,76 +255,4 @@ export const categories = {
       styling: '스타일링'
     }
   },
-  beauty: {
-    name: '뷰티',
-    icon: '💄',
-    subcategories: {
-      makeup: '메이크업',
-      skincare: '스킨케어',
-      hair: '헤어',
-      nail: '네일',
-      korean_beauty: 'K-뷰티',
-      tutorial: '뷰티 튜토리얼'
-    }
-  },
-  performance: {
-    name: '공연',
-    icon: '🎭',
-    subcategories: {
-      theater: '연극',
-      musical: '뮤지컬',
-      magic: '마술',
-      comedy: '코미디',
-      circus: '서커스',
-      street_performance: '길거리 공연'
-    }
-  },
-  brand: {
-    name: '브랜드',
-    icon: '🏷️',
-    subcategories: {
-      fashion_brand: '패션 브랜드',
-      beauty_brand: '뷰티 브랜드',
-      lifestyle: '라이프스타일',
-      tech: '테크 브랜드',
-      food: '푸드 브랜드',
-      startup: '스타트업'
-    }
-  },
-  fitness: {
-    name: '운동',
-    icon: '💪',
-    subcategories: {
-      yoga: '요가',
-      pilates: '필라테스',
-      dance_fitness: '댄스 피트니스',
-      strength: '근력 운동',
-      cardio: '유산소',
-      outdoor: '야외 운동'
-    }
-  },
-  healing: {
-    name: '힐링',
-    icon: '🧘',
-    subcategories: {
-      meditation: '명상',
-      mindfulness: '마인드풀니스',
-      therapy: '치료',
-      wellness: '웰니스',
-      spa: '스파',
-      mental_health: '정신 건강'
-    }
-  },
-  product: {
-    name: '제품',
-    icon: '🛍️',
-    subcategories: {
-      handmade: '수제 제품',
-      artisanal: '장인 제품',
-      organic: '유기농',
-      eco_friendly: '친환경',
-      tech_gadgets: '테크 가젯',
-      home_decor: '홈 데코'
-    }
-  }
 };

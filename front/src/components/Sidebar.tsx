@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Music, Zap, Palette, User, Heart, Shirt, Sparkles, Theater, Tag, Dumbbell, Brain, ShoppingBag } from 'lucide-react';
+import { Star, Music, Zap, Palette, User, Heart, Shirt } from 'lucide-react';
 import { categories } from '../data/mockData';
 
 interface SidebarProps {
@@ -40,12 +40,6 @@ const Sidebar: React.FC<SidebarProps> = ({
       case 'dance': return <Zap className="w-5 h-5" />;
       case 'art': return <Palette className="w-5 h-5" />;
       case 'fashion': return <Shirt className="w-5 h-5" />;
-      case 'beauty': return <Sparkles className="w-5 h-5" />;
-      case 'performance': return <Theater className="w-5 h-5" />;
-      case 'brand': return <Tag className="w-5 h-5" />;
-      case 'fitness': return <Dumbbell className="w-5 h-5" />;
-      case 'healing': return <Brain className="w-5 h-5" />;
-      case 'product': return <ShoppingBag className="w-5 h-5" />;
       default: return <Star className="w-5 h-5" />;
     }
   };

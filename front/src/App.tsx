@@ -8,6 +8,7 @@ import MyPage from './pages/MyPage';
 import Login from './pages/Login';
 import CreateService from './pages/CreateService';
 import CreatePost from './pages/CreatePost';
+import Settings from './pages/Settings';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -80,6 +81,10 @@ function App() {
               <Route 
                 path="/create-post" 
                 element={<CreatePost />} 
+              />
+              <Route 
+                path="/settings" 
+                element={<Settings currentUser={currentUser} setCurrentUser={setCurrentUser} />} 
               />
             </Routes>
           </main>

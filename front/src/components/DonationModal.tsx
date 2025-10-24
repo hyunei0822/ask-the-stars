@@ -12,7 +12,33 @@ interface DonationModalProps {
 const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose, artist }) => {
   const [selectedType, setSelectedType] = useState<'subscription' | 'good' | 'direct'>('subscription');
   const [selectedGood, setSelectedGood] = useState<Good | null>(null);
+  const [goodQuantity, setGoodQuantity] = useState<{ [key: string]: number }>({});
   const [directAmount, setDirectAmount] = useState<number>(10000);
+
+  const handleQuantityChange = (goodId: string, change: number) => {
+    console.log(`Changing quantity for goodId: ${goodId}, change: ${change}`);
+    setGoodQuantity(prev => {
+      const currentQuantity = prev[goodId] || 0;
+      const newQuantity = Math.max(0, currentQuantity + change);
+      console.log(`Previous state:`, prev);
+      console.log(`New quantity for ${goodId}: ${newQuantity}`);
+      const newState = {
+        ...prev,
+        [goodId]: newQuantity
+      };
+      console.log(`New state:`, newState);
+      return newState;
+    });
+  };
+
+  const getTotalPrice = () => {
+    if (!selectedGood) return 0;
+    // selectedGood의 인덱스를 찾아서 uniqueKey 생성
+    const goodIndex = artist.goods?.findIndex(good => good.id === selectedGood.id) ?? -1;
+    const uniqueKey = `${selectedGood.id}-${goodIndex}`;
+    const quantity = goodQuantity[uniqueKey] || 0;
+    return selectedGood.price * quantity;
+  };
 
   const handleDonation = () => {
     // 실제 결제 로직 구현
@@ -108,32 +134,65 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose, artist }
               {selectedType === 'good' && (
                 <div className="space-y-3">
                   <h3 className="font-medium text-white">굿즈 선택</h3>
-                  {artist.goods?.map((good) => (
-                    <button
-                      key={good.id}
-                      onClick={() => setSelectedGood(good)}
-                      className={`w-full p-3 rounded-lg border transition-all text-left ${
-                        selectedGood?.id === good.id
-                          ? 'border-purple-400 bg-purple-500/20'
-                          : 'border-white/20 hover:border-white/40'
-                      }`}
-                    >
+                  {artist.goods?.map((good, index) => {
+                    const uniqueKey = `${good.id}-${index}`;
+                    console.log(`Rendering good: ${good.name}, ID: ${good.id}, Index: ${index}, UniqueKey: ${uniqueKey}, Quantity: ${goodQuantity[uniqueKey] || 0}`);
+                    return (
+                      <div
+                        key={good.id}
+                        className={`w-full p-3 rounded-lg border transition-all ${
+                          selectedGood?.id === good.id
+                            ? 'border-purple-400 bg-purple-500/20'
+                            : 'border-white/20 hover:border-white/40'
+                        }`}
+                      >
                       <div className="flex items-center space-x-3">
-                        <img
-                          src={good.image}
-                          alt={good.name}
-                          className="w-12 h-12 rounded-lg object-cover"
-                        />
-                        <div className="flex-1">
-                          <div className="font-medium text-white">{good.name}</div>
-                          <div className="text-sm text-gray-300">{good.description}</div>
-                          <div className="text-lg font-bold text-star-400">
-                            {good.price.toLocaleString()}원
+                        <button
+                          onClick={() => setSelectedGood(good)}
+                          className="flex-1 flex items-center space-x-3 text-left"
+                        >
+                          <img
+                            src={good.image}
+                            alt={good.name}
+                            className="w-12 h-12 rounded-lg object-cover"
+                          />
+                          <div className="flex-1">
+                            <div className="font-medium text-white">{good.name}</div>
+                            <div className="text-sm text-gray-300">{good.description}</div>
+                            <div className="text-lg font-bold text-star-400">
+                              {good.price.toLocaleString()}원
+                            </div>
                           </div>
+                        </button>
+                        
+                        {/* 수량 조절 버튼 */}
+                        <div className="flex items-center space-x-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleQuantityChange(uniqueKey, -1);
+                            }}
+                            className="w-8 h-8 rounded-full bg-gray-600 hover:bg-gray-500 flex items-center justify-center text-white text-lg font-bold transition-colors"
+                          >
+                            -
+                          </button>
+                          <span className="w-8 text-center text-white font-medium">
+                            {goodQuantity[uniqueKey] || 0}
+                          </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleQuantityChange(uniqueKey, 1);
+                            }}
+                            className="w-8 h-8 rounded-full bg-gray-600 hover:bg-gray-500 flex items-center justify-center text-white text-lg font-bold transition-colors"
+                          >
+                            +
+                          </button>
                         </div>
                       </div>
-                    </button>
-                  ))}
+                    </div>
+                    );
+                  })}
                 </div>
               )}
 
@@ -166,13 +225,34 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose, artist }
               )}
             </div>
 
+            {/* 투명성 정보 */}
+            <div className="mb-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+              <div className="flex items-center space-x-2 mb-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                <span className="text-green-400 text-sm font-medium">팬의 마음이 온전히 전해집니다</span>
+              </div>
+              <div className="text-xs text-gray-300 space-y-1">
+                <div>• 회사 수수료: 약 10-20% (물품제작비 1,000원 + 인건비 1,000원)</div>
+                <div>• 나머지 80-90%는 아티스트에게 직접 전달됩니다</div>
+              </div>
+            </div>
+
             {/* 결제 버튼 */}
             <button
               onClick={handleDonation}
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-lg font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+              disabled={selectedType === 'good' && (!selectedGood || getTotalPrice() === 0)}
+              className={`w-full py-3 rounded-lg font-medium transition-all duration-300 ${
+                selectedType === 'good' && (!selectedGood || getTotalPrice() === 0)
+                  ? 'bg-gray-500 text-gray-300 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 transform hover:scale-105'
+              }`}
             >
               {selectedType === 'subscription' && `${artist.subscriptionPrice?.toLocaleString()}원 구독하기`}
-              {selectedType === 'good' && selectedGood && `${selectedGood.price.toLocaleString()}원 구매하기`}
+              {selectedType === 'good' && (
+                selectedGood && getTotalPrice() > 0 
+                  ? `${getTotalPrice().toLocaleString()}원 구매하기 (${goodQuantity[`${selectedGood.id}-${artist.goods?.findIndex(good => good.id === selectedGood.id) ?? -1}`] || 0}개)`
+                  : '굿즈를 선택하고 수량을 정해주세요'
+              )}
               {selectedType === 'direct' && `${directAmount.toLocaleString()}원 후원하기`}
             </button>
           </motion.div>

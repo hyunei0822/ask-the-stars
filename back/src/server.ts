@@ -9,9 +9,7 @@ import routes from './routes';
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 // 환경 변수 직접 설정 (fallback)
-if (!process.env.MONGODB_URI) {
-  process.env.MONGODB_URI = 'mongodb://localhost:27018/ask-the-stars';
-}
+process.env.MONGODB_URI = 'mongodb://localhost:27017/ask-the-stars';
 if (!process.env.PORT) {
   process.env.PORT = '5000';
 }

@@ -106,10 +106,13 @@ const MyPage: React.FC<MyPageProps> = ({ currentUser, setCurrentUser }) => {
           </div>
 
           <div className="flex space-x-3">
-            <button className="flex items-center space-x-2 bg-white/10 text-white px-4 py-2 rounded-lg hover:bg-white/20 transition-colors">
+            <Link
+              to="/settings"
+              className="flex items-center space-x-2 bg-white/10 text-white px-4 py-2 rounded-lg hover:bg-white/20 transition-colors"
+            >
               <Settings className="w-4 h-4" />
               <span>설정</span>
-            </button>
+            </Link>
             <button 
               onClick={handleLogout}
               className="flex items-center space-x-2 bg-red-500/20 text-red-400 px-4 py-2 rounded-lg hover:bg-red-500/30 transition-colors"
